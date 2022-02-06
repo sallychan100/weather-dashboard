@@ -1,4 +1,4 @@
-# Weather Dashboard (Challenge 6)
+# Weather Dashboard
 
 ## Purpose:
 Allow travellers to see the weather outlook for multiple cities so trips can be planned accordingly.
