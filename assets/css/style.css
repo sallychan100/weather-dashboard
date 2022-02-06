@@ -3,6 +3,7 @@
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin-left: 5px;
     margin-right: 5px;
+    margin-top: 0px;
 }
 body {
     background-image: url("../image/bgi.jpg");
@@ -12,6 +13,7 @@ body {
 
 header {
     background-image: linear-gradient(to right, rgb(151, 201, 235), rgb(6, 43, 68));
+    margin-top: 0;
 }
 
 h1 {

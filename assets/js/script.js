@@ -3,21 +3,28 @@ var pastCitySearch = []
 function cityNameFromUser (event)  {
     //prevent page from refreshing when submit button is clicked
     event.preventDefault()
-    var cityName = document.getElementById("city-input").value; 
-    currentWeather (cityName)
+    var cityInput = document.getElementById("city-input").value; 
+    currentWeather (cityInput)
 }
 // parameter latitude,longitude were passed on
 
-function currentWeather (cityName) {
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=4d98bc41af7871594d875bc087999e62")
-    .then(response => response.json()) 
-    .then(data => {
+function currentWeather (cityInput) {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=4d98bc41af7871594d875bc087999e62")
+    .then(function (response) {
+        if (response.ok) {
+          response.json()
+          .then(function (data) {
         console.log(data)
         var latitude = data.coord.lat;
         var longitude = data.coord.lon;
-        var city = data.name
+        var city = data.name;
         saveToLocalStorage(city)
         forecast(latitude,longitude)
+        }
+    } else {
+        alert('Search unsuccessful. Please enter a valid city name.') 
+        }
+    
     })
 }
 
