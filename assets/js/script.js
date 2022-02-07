@@ -52,8 +52,7 @@ var displayCurrent = function (currentTemp,currentWind,currentHumidity,currentUv
     $("#current-wind").append('Wind Speed:',currentWind,'MPH')
     $("#current-uv").append('UV Index:',currentUv)
     if (currentUv < 2){
-        $("#current-uv").setAttribute("background", "green");
-        }
+        $("#current-uv").attr("background", "green");
 }
 
 var pastCitySearch = []
