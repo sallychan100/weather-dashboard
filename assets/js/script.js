@@ -46,11 +46,14 @@ function weather (latitude,longitude) {
 
 var displayCurrent = function (currentTemp,currentWind,currentHumidity,currentUv) {
     // document.getElementById("current-date").innerHTML = moment().format("MMM Do YY");
-    $("#current-date").append(moment().format("MMM Do YY"))
+    $("#current-date").append(moment().format("MMM Do YYYY"))
     $("#current-temp").append('Tmeperature:',currentTemp,' °C')
     $("#current-humidity").append('Humidity:',currentHumidity,' %')
     $("#current-wind").append('Wind Speed:',currentWind,'MPH')
     $("#current-uv").append('UV Index:',currentUv)
+    if (currentUv < 2){
+        $("#current-uv").setAttribute("background", "green");
+        }
 }
 
 var pastCitySearch = []
