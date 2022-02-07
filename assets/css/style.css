@@ -8,7 +8,7 @@
 body {
     background-image: url("../image/bgi.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat:repeat-y;
 }
 
 header {
