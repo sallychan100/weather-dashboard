@@ -17,8 +17,6 @@ function getLatAndLon (cityInput) {
         var latitude = data.coord.lat;
         var longitude = data.coord.lon;
 
-        displayCurrent (city)
-
         //save to local storage 
         saveToLocalStorage(city,latitude,longitude)
         weather(latitude,longitude)
@@ -44,14 +42,13 @@ function weather (latitude,longitude) {
 }
 
 //Display current weather 
-var currentDate = moment().format("MMM Do YYYY")
 
 var displayCurrent = function (city,currentDate,currentTemp,currentHumidity,currentWind,currentUv) {
     // document.getElementById("current-date").innerHTML = moment().format("MMM Do YY");
-
     const currentCityDisplay = $("#current-city").text(city)
+    var currentDate = moment().format("MMM Do YYYY")
     const currentDateDisplay = $("#current-date").text(currentDate)
-    const currentTempDisplay = $("#current-temp").text('Tmeperature:  '+ currentTemp + '  °C')
+    const currentTempDisplay = $("#current-temp").text('Tmeperature:  ' + currentTemp + '  °C')
     const currentHumidityDisplay = $("#current-humidity").text('Humidity:  '+ currentHumidity +'   %')
     const currentWindDisplay = $("#current-wind").text('Wind Speed:  '+ currentWind +'  MPH')
     const currentUvDisplay = $("#current-uv").text('UV Index:  '+ currentUv)
@@ -67,6 +64,8 @@ var displayCurrent = function (city,currentDate,currentTemp,currentHumidity,curr
         $("#current-uv").css({"background-color":"#922B21"}); 
     }
 }
+
+// display forecast
 
 
 var pastCitySearch = []
