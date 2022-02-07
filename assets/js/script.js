@@ -19,7 +19,6 @@ function getLatAndLon (cityInput) {
 
         //save to local storage 
         saveToLocalStorage(city,latitude,longitude)
-
         weather(latitude,longitude)
         })
     }else {
@@ -42,18 +41,31 @@ function weather (latitude,longitude) {
     })
 }
 
-//Display current date weather 
+//Display current weather 
 
 var displayCurrent = function (currentTemp,currentWind,currentHumidity,currentUv) {
     // document.getElementById("current-date").innerHTML = moment().format("MMM Do YY");
-    $("#current-date").append(moment().format("MMM Do YYYY"))
-    $("#current-temp").append('Tmeperature:',currentTemp,' °C')
-    $("#current-humidity").append('Humidity:',currentHumidity,' %')
-    $("#current-wind").append('Wind Speed:',currentWind,'MPH')
-    $("#current-uv").append('UV Index:',currentUv)
+
+    const currentDate = $("#current-date").text(moment().format("MMM Do YYYY"))
+    const currentTempDisplay = ("#current-temp").text('Tmeperature:',currentTemp,' °C')
+    const currentHumidityDisplay = $("#current-humidity").text('Humidity:',currentHumidity,' %')
+    const currentWindDisplay = $("#current-wind").text('Wind Speed:',currentWind,'MPH')
+    const currentUvDisplay = $("#current-uv").text('UV Index:',currentUv)
+
     if (currentUv < 2){
-        $("#current-uv").attr("background", "green");
+        $("#current-uv").css({"background-color":"#51A638 "});  
+    } if (currentUv >= 3 && currentUv <= 5 ){
+        $("#current-uv").css({"background-color":"#F7DC6F"});
+    } if (currentUv >= 6 && currentUv <= 7 ){
+        $("#current-uv").css({"background-color":"#D68910"});
+    } if (currentUv >= 8 && currentUv <= 10 ){
+        $("#current-uv").css({"background-color":"#DA4771"});
+    } if (currentUv >11){
+        $("#current-uv").css({"background-color":"#922B21"}); 
+    }
+
 }
+
 
 var pastCitySearch = []
 
@@ -66,15 +78,6 @@ function saveToLocalStorage (city,latitude,longitude){
 }
 
 //Displaying past city name 
-// var titleEl = document.createElement('span');
-
-// for (var i = 0; i < pastCitySearch.length; i++) {
-//  var pastEl = document.createElement('a');
-//     issueEl.classList = 'list-item flex-row justify-space-between align-center';
-//     issueEl.setAttribute('href', issues[i].html_url);
-//     issueEl.setAttribute('target', '_blank');
-
-//click on past search and re-search again
 
 
 document.getElementById("submit-button").addEventListener("click", formSubmitHandler)
