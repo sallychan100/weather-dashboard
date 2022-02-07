@@ -39,11 +39,11 @@ label {
     font-size: 30px;    
     font-weight: bold;
 }
-form p {
+form ol {
     font-size: 20px;
-    margin: 20px 10px;
-    line-height: 1.5;
-    text-align: justify;
+    margin: 20px 0px;
+    line-height: 2;
+    text-align: left;
 }
 
 button {

@@ -19,9 +19,11 @@
   <div class = "form-box">
     <form>   
       <label for = "city-input"> Search for a City: <label>
-      <p> Please enter a city's full name instead of abbreviation, <br>
-        for example, enter San Francisco instead of SF. 
-      </p>
+      <ol>
+        <li>Enter a city in English only </li>
+        <li>Only full name with correct spelling and appropriate spacing are accepted.
+        For example, <br> enter San Francisco, not SF or SanFrancisco </li>
+      </ol>
       <input type = "text" id = "city-input">
       <button id = "submit-button" type="submit">
         Search
@@ -48,8 +50,9 @@
 <!-- flex container ends -->
 
 
-
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
+    
 
 
   </body>
