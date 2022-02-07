@@ -43,11 +43,11 @@ function weather (latitude,longitude) {
 }
 
 //Display current date weather 
-var displayCurrent = function (currentTemp,currentWind,currentHumidity,currentUv) {
-    document.getElementById("current-date").innerHTML =$moment().format("MMM Do YY");
 
-    var currentContainer = document.getElementsByClassName('current-weather')
-    currentContainer.appendchild(currentTemp)
+var displayCurrent = function (currentTemp,currentWind,currentHumidity,currentUv) {
+    // document.getElementById("current-date").innerHTML = moment().format("MMM Do YY");
+    $("#current-date").append(moment().format("MMM Do YY"))
+    $(".current-weather").append(currentTemp)
 }
 
 
@@ -66,9 +66,9 @@ function saveToLocalStorage (city,latitude,longitude){
 
 // for (var i = 0; i < pastCitySearch.length; i++) {
 //  var pastEl = document.createElement('a');
-    // issueEl.classList = 'list-item flex-row justify-space-between align-center';
-    // issueEl.setAttribute('href', issues[i].html_url);
-    // issueEl.setAttribute('target', '_blank');
+//     issueEl.classList = 'list-item flex-row justify-space-between align-center';
+//     issueEl.setAttribute('href', issues[i].html_url);
+//     issueEl.setAttribute('target', '_blank');
 
 //click on past search and re-search again
 
