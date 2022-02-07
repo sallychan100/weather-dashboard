@@ -35,7 +35,7 @@ function weather (latitude,longitude) {
     .then(data => {
         console.log(data)
         var currentTemp = data.current.temp;
-        var currentWind = data.current.weather.wind_speed;
+        var currentWind = data.current.wind_speed;
         var currentHumidity = data.current.humidity;
         var currentUv= data.current.uvi;
         displayCurrent (currentTemp,currentWind,currentHumidity,currentUv);
@@ -47,9 +47,11 @@ function weather (latitude,longitude) {
 var displayCurrent = function (currentTemp,currentWind,currentHumidity,currentUv) {
     // document.getElementById("current-date").innerHTML = moment().format("MMM Do YY");
     $("#current-date").append(moment().format("MMM Do YY"))
-    $(".current-weather").append(currentTemp)
+    $("#current-temp").append('Tmeperature:',currentTemp,' °C')
+    $("#current-humidity").append('Humidity:',currentHumidity,' %')
+    $("#current-wind").append('Wind Speed:',currentWind,'MPH')
+    $("#current-uv").append('UV Index:',currentUv)
 }
-
 
 var pastCitySearch = []
 
