@@ -77,11 +77,11 @@ console.log(pastCitySearch)
 
 
 function saveToLocalStorage (city){
-    // push() method adds one or more elements to the end of an array 
     for (var i=0; i < pastCitySearch.length; i++){
         if (city = pastCitySearch[i]){
         alert('Duplicate Search, please look at search history or enter a new')
         } else if (city != pastCitySearch[i]) { 
+            // push() method adds one or more elements to the end of an array 
             pastCitySearch.push(city)
             localStorage.setItem('PastCity', JSON.stringify(pastCitySearch))
             displayPastSearch ()
