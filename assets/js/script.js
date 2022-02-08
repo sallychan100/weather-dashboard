@@ -56,7 +56,7 @@ var displayCurrent = function (weatherData) {
     const currentWindDisplay = $("#current-wind").text('Wind Speed:  '+ currentWind +'  MPH')
     const currentUvDisplay = $("#current-uv").text('UV Index:  '+ currentUv)
     if (currentUv <= 2){
-        $("#current-uv").css({"background-color":"#51A638 "});  
+        $("#current-uv").css({"background-color":"#51A638"});  
     } if (currentUv >= 3 && currentUv <= 5 ){
         $("#current-uv").css({"background-color":"#F7DC6F"});
     } if (currentUv >= 6 && currentUv <= 7 ){
@@ -72,20 +72,19 @@ var displayCurrent = function (weatherData) {
 
 //set past city searches to what's inside LS, if nothing inside LS, set it to an empty array 
 //LS always return a string. JSON.parse will a constructing the JavaScript value 
+
 var pastCitySearch = JSON.parse(localStorage.getItem('PastCity'))|| [] 
 console.log(pastCitySearch)
 
 
 function saveToLocalStorage (city){
-    for (var i=0; i < pastCitySearch.length; i++){
-        if (city = pastCitySearch[i]){
+        if (pastCitySearch.includes(city)){
         alert('Duplicate Search, please look at search history or enter a new')
-        } else if (city != pastCitySearch[i]) { 
-            // push() method adds one or more elements to the end of an array 
+        } else{ 
+        // push() method adds one or more elements to the end of an array 
             pastCitySearch.push(city)
             localStorage.setItem('PastCity', JSON.stringify(pastCitySearch))
             displayPastSearch ()
-        }
     }
 }
 //Displaying past city name 
@@ -98,11 +97,8 @@ function displayPastSearch (){
         var pastButtonEl = $('<button>')
         pastButtonEl.text(pastCitySearch[i])
         $('.search-history-buttons').append(pastButtonEl)
-
     }
 }
-
-
 
 document.getElementById("submit-button").addEventListener("click", formSubmitHandler)
 displayPastSearch ()

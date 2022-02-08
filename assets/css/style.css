@@ -61,7 +61,13 @@ button {
 .current-weather {
     width:60%;
     height: 250px;   
+    text-align: justify;
+    line-height: 1.5;
 }
+.current-weather h3 {
+width: 25%
+}
+
 .search-history{
     width:30%;
 }
