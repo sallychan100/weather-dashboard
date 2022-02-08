@@ -18,8 +18,9 @@ function getLatAndLon (cityInput) {
         var longitude = data.coord.lon;
 
         //save to local storage 
-        saveToLocalStorage(city,latitude,longitude)
+        saveToLocalStorage(city)
         weather(latitude,longitude)
+        $('#current-city').text(data.name)
         })
     }else {
         window.alert('Search unsuccessful. Please enter a valid city name.') 
@@ -33,19 +34,21 @@ function weather (latitude,longitude) {
     .then(response => response.json()) 
     .then(data => {
         console.log(data)
-        var currentTemp = data.current.temp;
-        var currentWind = data.current.wind_speed;
-        var currentHumidity = data.current.humidity;
-        var currentUv= data.current.uvi;
-        displayCurrent (currentTemp,currentWind,currentHumidity,currentUv);
+        displayCurrent (data);
     })
 }
 
 //Display current weather 
 
-var displayCurrent = function (city,currentDate,currentTemp,currentHumidity,currentWind,currentUv) {
+var displayCurrent = function (weatherData) {
+    var currentTemp = weatherData.current.temp;
+    var currentWind = weatherData.current.wind_speed;
+    var currentHumidity = weatherData.current.humidity;
+    var currentUv= weatherData.current.uvi;
+    console.log(weatherData)
+    
+    
     // document.getElementById("current-date").innerHTML = moment().format("MMM Do YY");
-    const currentCityDisplay = $("#current-city").text(city)
     var currentDate = moment().format("MMM Do YYYY")
     const currentDateDisplay = $("#current-date").text(currentDate)
     const currentTempDisplay = $("#current-temp").text('Tmeperature:  ' + currentTemp + '  °C')
@@ -67,19 +70,39 @@ var displayCurrent = function (city,currentDate,currentTemp,currentHumidity,curr
 
 // display forecast
 
+//set past city searches to what's inside LS, if nothing inside LS, set it to an empty array 
+//LS always return a string. JSON.parse will a constructing the JavaScript value 
+var pastCitySearch = JSON.parse(localStorage.getItem('PastCity'))|| [] 
+console.log(pastCitySearch)
 
-var pastCitySearch = []
 
-// data from current weather function passed on 
-function saveToLocalStorage (city,latitude,longitude){
-    pastCitySearch.push(city)
-    localStorage.setItem('name', pastCitySearch)
-    localStorage.setItem('latitude', latitude)
-    localStorage.setItem('longitude', longitude)
+function saveToLocalStorage (city){
+    // push() method adds one or more elements to the end of an array 
+    for (var i=0; i < pastCitySearch.length; i++){
+        if (city = pastCitySearch[i]){
+        alert('Duplicate Search, please look at search history or enter a new')
+        } else if (city != pastCitySearch[i]) { 
+            pastCitySearch.push(city)
+            localStorage.setItem('PastCity', JSON.stringify(pastCitySearch))
+            displayPastSearch ()
+        }
+    }
+}
+//Displaying past city name 
+
+function displayPastSearch (){
+    $('.search-history-buttons').empty()
+
+    //loop over the pastCitySearch array 
+    for (var i=0; i < pastCitySearch.length; i++){
+        var pastButtonEl = $('<button>')
+        pastButtonEl.text(pastCitySearch[i])
+        $('.search-history-buttons').append(pastButtonEl)
+
+    }
 }
 
-//Displaying past city name 
 
 
 document.getElementById("submit-button").addEventListener("click", formSubmitHandler)
-
+displayPastSearch ()
