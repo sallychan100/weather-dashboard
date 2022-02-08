@@ -16,14 +16,14 @@ Allow travellers to see the weather outlook for multiple cities so trips can be 
 * Third party API
 
 ## links:
-Deployed url:
+Deployed url: https://sallychan100.github.io/weather-dashboard/
 
 
-Github Repo:
+Github Repo: https://github.com/sallychan100/weather-dashboard
 
 
 ## Picture of deployed site: 
-![Screenshot](link)
+![Screenshot](https://raw.githubusercontent.com/sallychan100/weather-dashboard/main/assets/image/screenshot.png)
 
 ## Contacts
 * Made with ❤️ by Sally Chan
