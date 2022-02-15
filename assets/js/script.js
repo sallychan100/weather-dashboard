@@ -130,7 +130,7 @@ function displayForecast(forecastData){
     <div>${futureDate}</div>
     <img src = "http://openweathermap.org/img/wn/${icon}@2x.png">
     <div> ${conditionForecast} </div>
-    <div> Temperature : ${minTemp} °C to  ${maxTemp} °C </div>
+    <div> Temperature : ${minTemp} °C   -    ${maxTemp} °C </div>
     <div> Wind: ${windSpeedForecast} MPH </div>
     <div> Humidity: ${humidityForecast} % </div>
     </div>`
