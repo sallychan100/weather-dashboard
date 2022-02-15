@@ -33,8 +33,9 @@ function weather (latitude,longitude) {
     fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=metric&cnt=5&appid=4d98bc41af7871594d875bc087999e62")
     .then(response => response.json()) 
     .then(data => {
-        console.log(data)
+        // console.log(data)
         displayCurrent (data);
+        displayForecast(data);
     })
 }
 
@@ -45,16 +46,17 @@ var displayCurrent = function (weatherData) {
     var currentWind = weatherData.current.wind_speed;
     var currentHumidity = weatherData.current.humidity;
     var currentUv= weatherData.current.uvi;
-    console.log(weatherData)
-    
+    var icon = weatherData.current.weather[0].icon
+    // console.log(weatherData)
     
     // document.getElementById("current-date").innerHTML = moment().format("MMM Do YY");
-    var currentDate = moment().format("MMM Do YYYY")
-    const currentDateDisplay = $("#current-date").text(currentDate)
-    const currentTempDisplay = $("#current-temp").text('Tmeperature:  ' + currentTemp + '  °C')
-    const currentHumidityDisplay = $("#current-humidity").text('Humidity:  '+ currentHumidity +'   %')
-    const currentWindDisplay = $("#current-wind").text('Wind Speed:  '+ currentWind +'  MPH')
-    const currentUvDisplay = $("#current-uv").text('UV Index:  '+ currentUv)
+    var currentDate = moment().format('MMMM Do YYYY, h:mm:ss a')
+     $("#current-date").text(currentDate)
+     $('#icon').attr('src', `http://openweathermap.org/img/wn/${icon}@2x.png`)
+    $("#current-temp").text('Temperature:' + currentTemp + '  °C')
+    $("#current-humidity").text('Humidity:'+ currentHumidity +'   %')
+    $("#current-wind").text('Wind Speed:'+ currentWind +'  MPH')
+    $("#current-uv").text('UV Index:  '+ currentUv)
     if (currentUv <= 2){
         $("#current-uv").css({"background-color":"#51A638"});  
     } if (currentUv >= 3 && currentUv <= 5 ){
@@ -67,9 +69,6 @@ var displayCurrent = function (weatherData) {
         $("#current-uv").css({"background-color":"#922B21"}); 
     }
 }
-
-// display forecast
-
 //set past city searches to what's inside LS, if nothing inside LS, set it to an empty array 
 //LS always return a string. JSON.parse will a constructing the JavaScript value 
 
@@ -78,9 +77,8 @@ console.log(pastCitySearch)
 
 
 function saveToLocalStorage (city){
-        if (pastCitySearch.includes(city)){
-        alert('Duplicate Search, please look at search history or enter a new')
-        } else{ 
+//if duplicate city name is found in LS, don't add twice to LS 
+        if (!pastCitySearch.includes(city)){
         // push() method adds one or more elements to the end of an array 
             pastCitySearch.push(city)
             localStorage.setItem('PastCity', JSON.stringify(pastCitySearch))
@@ -92,13 +90,55 @@ function saveToLocalStorage (city){
 function displayPastSearch (){
     $('.search-history-buttons').empty()
 
-    //loop over the pastCitySearch array 
+    //adding past search buttons by looping over the pastCitySearch array 
     for (var i=0; i < pastCitySearch.length; i++){
         var pastButtonEl = $('<button>')
         pastButtonEl.text(pastCitySearch[i])
         $('.search-history-buttons').append(pastButtonEl)
+
+        //re-do search
+        pastButtonEl.click(function() {
+            // console.log(this)
+            getLatAndLon(this.textContent);
+          });
     }
 }
+
+// adding forecast cards
+function displayForecast(forecastData){
+    
+    var cards = $('.cards');
+
+    //empty container before adding anything new 
+    cards.empty()
+
+
+    for (var i=1 ;i<5 ;i++){
+    
+    //get date 
+    var futureDate = moment().add(i, 'days').format("MMM Do YY")
+    //extracting and catagorizing data 
+    var minTemp = forecastData.daily[i].temp.min
+    var maxTemp = forecastData.daily[i].temp.max
+    var windSpeedForecast = forecastData.daily[i].wind_speed
+    var humidityForecast = forecastData.daily[i].humidity
+    var conditionForecast = forecastData.daily[i].weather[0].main
+    var icon = forecastData.daily[i].weather[0].icon
+
+// Create forecast card elements and give it an class of 'section-title'
+    var forecastCardEl = `<div class = "section-title">
+    <div>${futureDate}</div>
+    <img src = "http://openweathermap.org/img/wn/${icon}@2x.png">
+    <div> ${conditionForecast} </div>
+    <div> Temperature : ${minTemp} °C to  ${maxTemp} °C </div>
+    <div> Wind: ${windSpeedForecast} MPH </div>
+    <div> Humidity: ${humidityForecast} % </div>
+    </div>`
+// append to forecast cards section 
+    cards.append(forecastCardEl)
+  }
+}
+
 
 document.getElementById("submit-button").addEventListener("click", formSubmitHandler)
 displayPastSearch ()
