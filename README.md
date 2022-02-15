@@ -23,7 +23,7 @@ Github Repo: https://github.com/sallychan100/weather-dashboard
 
 
 ## Picture of deployed site: 
-![Screenshot](https://raw.githubusercontent.com/sallychan100/weather-dashboard/main/assets/image/screenshot.png)
+![Screenshot](https://github.com/sallychan100/weather-dashboard/blob/a92f2225b33090ab8130b68558f9a2b683833190/assets/image/screenshot.png)
 
 ## Contacts
 * Made with ❤️ by Sally Chan
